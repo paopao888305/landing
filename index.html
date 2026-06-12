@@ -1,0 +1,793 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Hearto - Meet New People Nearby</title>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '4449284028640179');
+    fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4449284028640179&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #ffd6e8 0%, #ff9cc7 42%, #f25b9b 100%);
+      color: #211426;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.8), transparent 20%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.5), transparent 18%),
+        linear-gradient(180deg, #ffd6e8 0%, #ff9cc7 42%, #f25b9b 100%);
+      padding-bottom: 96px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .top {
+      padding: 18px 20px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 23px;
+      font-weight: 900;
+      color: #ff2c7d;
+      letter-spacing: 0.2px;
+    }
+
+    .logo-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: #ff2c7d;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 7px;
+      font-size: 14px;
+    }
+
+    .online-pill {
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ff2c7d;
+      box-shadow: 0 6px 18px rgba(255,45,125,0.12);
+    }
+
+    .online-dot {
+      width: 10px;
+      height: 10px;
+      background: #26c566;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: -1px;
+      box-shadow: 0 0 0 3px rgba(38,197,102,0.18);
+    }
+
+    .hero {
+      padding: 8px 22px 16px;
+    }
+
+    .hero h1 {
+      font-size: 29px;
+      line-height: 1.08;
+      font-weight: 900;
+      margin-bottom: 10px;
+      letter-spacing: -0.8px;
+    }
+
+    .hero h1 span {
+      color: #ff2c7d;
+      display: block;
+    }
+
+    .hero p {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #6b3f58;
+      max-width: 370px;
+    }
+
+    .featured-wrap {
+      padding: 12px 0 14px;
+      overflow: hidden;
+    }
+
+    .featured-row {
+      display: flex;
+      gap: 14px;
+      padding: 0 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .featured-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .big-card {
+      min-width: 300px;
+      height: 420px;
+      border-radius: 23px;
+      overflow: hidden;
+      position: relative;
+      background: #ddd;
+      box-shadow: 0 16px 38px rgba(89, 16, 50, 0.22);
+    }
+
+    .big-card.side {
+      min-width: 92px;
+      filter: brightness(0.85);
+    }
+
+    .big-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.72) 100%);
+    }
+
+    .status {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.9);
+      color: #0b9d55;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .verified {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: #337df8;
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .profile-info {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 18px;
+      color: #fff;
+    }
+
+    .profile-info h2 {
+      font-size: 23px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .profile-info p {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-right: 5px;
+      margin-top: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin: 6px 0 18px;
+    }
+
+    .dots span {
+      width: 8px;
+      height: 8px;
+      background: rgba(255,45,125,0.36);
+      border-radius: 50%;
+    }
+
+    .dots span.active {
+      width: 18px;
+      border-radius: 12px;
+      background: #ff2c7d;
+    }
+
+    .stats {
+      margin: 8px 20px 26px;
+      background: #ff2c7d;
+      border-radius: 19px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(255,45,125,0.32);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 18px 8px;
+      position: relative;
+    }
+
+    .stat:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 22%;
+      right: 0;
+      width: 1px;
+      height: 56%;
+      background: rgba(255,255,255,0.34);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .section-head {
+      padding: 0 22px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .section-head a {
+      color: #ff2c7d;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .grid {
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .small-card {
+      height: 214px;
+      border-radius: 17px;
+      overflow: hidden;
+      position: relative;
+      background: #ddd;
+      box-shadow: 0 10px 22px rgba(89, 16, 50, 0.16);
+    }
+
+    .small-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .small-card .mini-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 46%, rgba(0,0,0,0.68) 100%);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ffcf36;
+      color: #552c00;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 9px;
+    }
+
+    .badge.hot {
+      background: #ff2c7d;
+      color: #fff;
+    }
+
+    .badge.new {
+      background: #247cff;
+      color: #fff;
+    }
+
+    .heart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 31px;
+      height: 31px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff2c7d;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .small-info {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 12px;
+      color: #fff;
+    }
+
+    .small-info h3 {
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .mini-tag {
+      display: inline-block;
+      font-size: 9.5px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.36);
+      color: #fff;
+      font-weight: 800;
+      margin-right: 3px;
+    }
+
+    .features {
+      padding: 28px 18px 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.82);
+      border-radius: 14px;
+      padding: 16px 8px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(89,16,50,0.12);
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #ffd1e5;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .feature span {
+      color: #755366;
+      font-size: 10px;
+    }
+
+    .notice {
+      margin: 0 18px 24px;
+      background: rgba(255,255,255,0.88);
+      border: 1px dashed rgba(255,45,125,0.38);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      gap: 11px;
+      align-items: center;
+    }
+
+    .notice-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex: 0 0 auto;
+    }
+
+    .notice p {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #42293a;
+    }
+
+    .notice b {
+      color: #ff2c7d;
+    }
+
+    .rating {
+      text-align: center;
+      color: #fff;
+      padding: 0 0 26px;
+      text-shadow: 0 2px 8px rgba(120,20,70,0.3);
+    }
+
+    .stars {
+      color: #ffe44e;
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .rating p {
+      font-size: 12px;
+      opacity: 0.95;
+    }
+
+    .bottom-cta {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+      width: min(410px, calc(100% - 20px));
+      z-index: 50;
+      background: rgba(255,139,189,0.45);
+      border-radius: 30px;
+      padding: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .download-btn {
+      width: 100%;
+      border: none;
+      background: #f90765;
+      color: #fff;
+      border-radius: 28px;
+      padding: 17px 16px;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 8px 0 rgba(168,0,70,0.18), 0 13px 25px rgba(249,7,101,0.34);
+      cursor: pointer;
+      letter-spacing: 0.2px;
+    }
+
+    .download-btn:active {
+      transform: translateY(1px);
+    }
+
+    .legal {
+      padding: 0 24px 24px;
+      color: rgba(255,255,255,0.9);
+      font-size: 10px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    @media (max-width: 390px) {
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .big-card {
+        min-width: 280px;
+        height: 395px;
+      }
+
+      .small-card {
+        height: 200px;
+      }
+
+      .download-btn {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="top">
+      <div class="logo">
+        <span class="logo-icon">♥</span>
+        Hearto
+      </div>
+
+      <div class="online-pill">
+        <span class="online-dot"></span>
+        12,925 online now
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>
+        Meet New People.
+        <span>Real Chats. Tonight.</span>
+      </h1>
+      <p>
+        Download Hearto and start chatting with verified people nearby.
+        Find friendly matches in India and connect in minutes.
+      </p>
+    </section>
+
+    <section class="featured-wrap">
+      <div class="featured-row">
+        <div class="big-card side">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Profile">
+          <div class="card-shade"></div>
+        </div>
+
+        <div class="big-card">
+          <img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?auto=format&fit=crop&w=800&q=80" alt="Riya">
+          <div class="card-shade"></div>
+          <div class="verified">✓ Verified</div>
+          <div class="status"><span class="online-dot"></span>Online</div>
+          <div class="profile-info">
+            <h2>Riya</h2>
+            <p>📍 2.5 km · Bangalore</p>
+            <span class="tag">Friendly</span>
+            <span class="tag">Chat Now</span>
+            <span class="tag">Nearby</span>
+          </div>
+        </div>
+
+        <div class="big-card side">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Profile">
+          <div class="card-shade"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span class="active"></span>
+    </div>
+
+    <section class="stats">
+      <div class="stat">
+        <strong>100K+</strong>
+        <span>Verified Users</span>
+      </div>
+      <div class="stat">
+        <strong>3 min</strong>
+        <span>Avg. Match</span>
+      </div>
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Free to Join</span>
+      </div>
+    </section>
+
+    <section class="section-head">
+      <h2>People Near You 💗</h2>
+      <a href="javascript:void(0)" onclick="goDownload()">View All ›</a>
+    </section>
+
+    <section class="grid">
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Aisha">
+        <div class="mini-shade"></div>
+        <div class="badge">⭐ VIP</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Aisha</h3>
+          <span class="mini-tag">Chat</span>
+          <span class="mini-tag">Nearby</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=600&q=80" alt="Neha">
+        <div class="mini-shade"></div>
+        <div class="badge hot">🔥 Hot</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Neha</h3>
+          <span class="mini-tag">Online</span>
+          <span class="mini-tag">Match</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=600&q=80" alt="Diya">
+        <div class="mini-shade"></div>
+        <div class="badge new">⭐ New</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Diya</h3>
+          <span class="mini-tag">Reply Fast</span>
+          <span class="mini-tag">Verified</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=600&q=80" alt="Sana">
+        <div class="mini-shade"></div>
+        <div class="badge hot">💬 Active</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Sana</h3>
+          <span class="mini-tag">Social</span>
+          <span class="mini-tag">Friendly</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=600&q=80" alt="Kavya">
+        <div class="mini-shade"></div>
+        <div class="badge">👑 Top</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Kavya</h3>
+          <span class="mini-tag">Nearby</span>
+          <span class="mini-tag">Chat</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1524503033411-c9566986fc8f?auto=format&fit=crop&w=600&q=80" alt="Tara">
+        <div class="mini-shade"></div>
+        <div class="badge hot">📍 Nearby</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Tara</h3>
+          <span class="mini-tag">Online</span>
+          <span class="mini-tag">Match</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1513379733131-47fc74b45fc7?auto=format&fit=crop&w=600&q=80" alt="Maya">
+        <div class="mini-shade"></div>
+        <div class="badge hot">🔥 Hot</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Maya</h3>
+          <span class="mini-tag">Active</span>
+          <span class="mini-tag">Verified</span>
+        </div>
+      </div>
+
+      <div class="small-card">
+        <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=600&q=80" alt="Zoya">
+        <div class="mini-shade"></div>
+        <div class="badge new">⭐ New</div>
+        <div class="heart">♥</div>
+        <div class="small-info">
+          <h3>Zoya</h3>
+          <span class="mini-tag">Chat Now</span>
+          <span class="mini-tag">Nearby</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <strong>Instant Chat</strong>
+        <span>Reply in seconds</span>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📍</div>
+        <strong>Near You</strong>
+        <span>Match nearby</span>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <strong>Verified</strong>
+        <span>Safer profiles</span>
+      </div>
+    </section>
+
+    <section class="notice">
+      <img class="notice-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Aanya">
+      <p>
+        <b>Aanya</b> is online now 👋<br>
+        Download Hearto and start chatting with nearby people in India.
+      </p>
+    </section>
+
+    <section class="rating">
+      <div class="stars">★★★★★</div>
+      <p>4.8 Rated · 5M+ Downloads</p>
+    </section>
+
+    <div class="legal">
+      Hearto is for adults 18+ only. Please chat respectfully and follow local laws and platform rules.
+    </div>
+  </div>
+
+  <div class="bottom-cta">
+    <button class="download-btn" onclick="goDownload()">
+      💗 Download Free - Start Chatting
+    </button>
+  </div>
+
+  <script>
+    /*
+      修改下载链接的位置：
+      把下面这个链接换成你的真实下载链接即可。
+    */
+    const DOWNLOAD_LINK = "https://your-download-link-here.com";
+
+    function goDownload() {
+      if (typeof fbq === "function") {
+        fbq("track", "Lead");
+      }
+
+      setTimeout(function () {
+        window.location.href = DOWNLOAD_LINK;
+      }, 250);
+    }
+  </script>
+</body>
+</html>
+```
